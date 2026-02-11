@@ -31,7 +31,7 @@ const Hero = () => {
         <div className="flex items-center justify-center gap-2 mb-6">
           <Code2 className="text-blue-400" size={24} />
           <h2 className="text-2xl md:text-3xl text-blue-400 font-semibold">
-            Full Stack Developer
+            MERN Stack Developer
           </h2>
         </div>
 
