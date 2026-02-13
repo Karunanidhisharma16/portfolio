@@ -58,10 +58,13 @@ const ProjectCard = ({
             href={liveLink}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
             className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-center font-semibold transition"
           >
             Live Demo
           </a>
+ 
+
 
           {/* GitHub */}
           <a
