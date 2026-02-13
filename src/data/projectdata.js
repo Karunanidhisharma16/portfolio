@@ -12,7 +12,7 @@ const projectsData = [
 //   apis: ["Etherscan API", "Alchemy"]
 // }
     image: "/signsure.png",
-    liveLink: "signsureweb3.logicryx.in",
+    liveLink: "https://signsureweb3.logicryx.in/",
     githubLink: "https://github.com/Karunanidhisharma16"
   },
   {
