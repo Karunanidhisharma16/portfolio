@@ -16,7 +16,7 @@ const projectsData = [
     githubLink: "https://github.com/Karunanidhisharma16"
   },
   {
-    id: 1,
+    id: 2,
     title: "ChatConnect",
     description: " real-time messaging platform connecting users instantly",
     tech: ["React", "Node.js", "MongoDB", "Express","Socket.io"],
