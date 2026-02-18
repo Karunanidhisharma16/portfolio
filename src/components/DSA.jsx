@@ -1,6 +1,6 @@
 /**
  * ==========================================================================
- * DSA PROFILE COMPONENT - CORS FIXED WITH PROXY
+ * DSA PROFILE COMPONENT - FIXED ALFA API PARSING
  * ==========================================================================
  */
 
@@ -24,60 +24,92 @@ const DSA = () => {
   const GFG_USERNAME = 'karunanidh5pe4';
 
   const fetchLeetCodeStats = async () => {
-    // Check if we're in development (localhost) or production
-    const isDev = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-    
-    const endpoints = isDev ? [
-      // Use Vite proxy in development
-      `/api/leetcode/${LEETCODE_USERNAME}`,
-      `/api/leetcode-alt/${LEETCODE_USERNAME}`
-    ] : [
-      // Direct URLs for production (your domain should work)
-      `https://leetcode-stats-api.herokuapp.com/${LEETCODE_USERNAME}`,
-      `https://alfa-leetcode-api.onrender.com/${LEETCODE_USERNAME}`
+    const endpoints = [
+      {
+        url: `https://alfa-leetcode-api.onrender.com/${LEETCODE_USERNAME}/solved`,
+        type: 'alfa'
+      },
+      {
+        url: `https://leetcode-api-faisalshohag.vercel.app/${LEETCODE_USERNAME}`,
+        type: 'faisal'
+      },
+      {
+        url: `https://leetcode-stats-api.herokuapp.com/${LEETCODE_USERNAME}`,
+        type: 'heroku'
+      }
     ];
 
     for (const endpoint of endpoints) {
       try {
-        console.log('Trying endpoint:', endpoint);
-        const response = await fetch(endpoint);
+        console.log('Trying endpoint:', endpoint.url);
+        const response = await fetch(endpoint.url);
         
         if (!response.ok) {
-          console.log('Endpoint failed:', endpoint, response.status);
+          console.log('Endpoint failed with status:', response.status);
           continue;
         }
 
         const data = await response.json();
-        console.log('Got data:', data);
+        console.log('Got data from', endpoint.type, ':', data);
 
-        // Check if we got valid data
-        if (!data || (data.totalSolved === undefined && data.solvedProblem === undefined)) {
-          console.log('Invalid data from:', endpoint);
-          continue;
+        let normalizedData = null;
+
+        // Parse based on API type
+        if (endpoint.type === 'alfa') {
+          // Alfa API format
+          if (data.solvedProblem !== undefined) {
+            normalizedData = {
+              totalSolved: data.solvedProblem || 0,
+              easySolved: data.easySolved || 0,
+              mediumSolved: data.mediumSolved || 0,
+              hardSolved: data.hardSolved || 0,
+              ranking: data.ranking || 0,
+              acceptanceRate: 0
+            };
+          }
+        } else if (endpoint.type === 'faisal') {
+          // Faisal API format
+          if (data.totalSolved !== undefined || data.total_solved !== undefined) {
+            normalizedData = {
+              totalSolved: data.totalSolved || data.total_solved || 0,
+              easySolved: data.easySolved || data.easy_solved || 0,
+              mediumSolved: data.mediumSolved || data.medium_solved || 0,
+              hardSolved: data.hardSolved || data.hard_solved || 0,
+              ranking: data.ranking || 0,
+              acceptanceRate: data.acceptanceRate || 0
+            };
+          }
+        } else {
+          // Heroku API format (standard)
+          if (data.totalSolved !== undefined) {
+            normalizedData = {
+              totalSolved: data.totalSolved || 0,
+              easySolved: data.easySolved || 0,
+              mediumSolved: data.mediumSolved || 0,
+              hardSolved: data.hardSolved || 0,
+              ranking: data.ranking || 0,
+              acceptanceRate: data.acceptanceRate || 0
+            };
+          }
         }
 
-        // Normalize data from different API formats
-        const normalizedData = {
-          totalSolved: data.totalSolved || data.solvedProblem || 0,
-          easySolved: data.easySolved || data.easy || 0,
-          mediumSolved: data.mediumSolved || data.medium || 0,
-          hardSolved: data.hardSolved || data.hard || 0,
-          ranking: data.ranking || 0,
-          acceptanceRate: data.acceptanceRate || 0
-        };
-
-        console.log('Normalized data:', normalizedData);
-        setLeetcodeData(normalizedData);
-        setError(null);
-        return; // Success!
+        if (normalizedData && normalizedData.totalSolved >= 0) {
+          console.log('✅ Successfully parsed data:', normalizedData);
+          setLeetcodeData(normalizedData);
+          setError(null);
+          return; // Success!
+        } else {
+          console.log('❌ Could not parse data from:', endpoint.type);
+          continue;
+        }
       } catch (err) {
-        console.error('Error with endpoint:', endpoint, err);
+        console.error('Error with endpoint:', endpoint.url, err);
         continue;
       }
     }
 
     // All endpoints failed
-    console.error('All endpoints failed');
+    console.error('❌ All endpoints failed');
     setError('Unable to fetch LeetCode stats. API temporarily unavailable.');
   };
 
@@ -404,7 +436,35 @@ const DSA = () => {
 
         </div>
 
-      
+        {/* Bottom CTA */}
+        <div className="text-center bg-gradient-to-r from-blue-600/10 to-purple-600/10 border border-blue-500/20 rounded-2xl p-8">
+          <h3 className="text-2xl font-bold text-white mb-3">
+            Let's Code Together! 🚀
+          </h3>
+          <p className="text-gray-400 mb-6">
+            Check out my solutions and connect with me on these platforms
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href={`https://leetcode.com/u/${LEETCODE_USERNAME}/`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center gap-2"
+            >
+              💻 LeetCode
+              <ExternalLink size={16} />
+            </a>
+            <a
+              href={`https://www.geeksforgeeks.org/user/${GFG_USERNAME}/`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg font-semibold transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center gap-2"
+            >
+              🎯 GeeksforGeeks
+              <ExternalLink size={16} />
+            </a>
+          </div>
+        </div>
 
       </div>
     </section>
