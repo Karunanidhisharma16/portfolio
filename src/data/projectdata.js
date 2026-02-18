@@ -13,7 +13,7 @@ const projectsData = [
 // }
     image: "/signsure.png",
     liveLink: "https://signsureweb3.logicryx.in/",
-    githubLink: "https://github.com/Karunanidhisharma16"
+    githubLink: "https://github.com/Karunanidhisharma16/safeguard-web3.git"
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const projectsData = [
     tech: ["React", "Node.js", "MongoDB", "Express","Socket.io"],
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&q=80",
     liveLink: "https://example.com",
-    githubLink: "https://github.com/Karunanidhisharma16"
+    githubLink: "https://github.com/Karunanidhisharma16/ChatConnect.git"
   },
   // {
   //   id: 3,
