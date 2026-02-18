@@ -436,36 +436,7 @@ const DSA = () => {
 
         </div>
 
-        {/* Bottom CTA */}
-        <div className="text-center bg-gradient-to-r from-blue-600/10 to-purple-600/10 border border-blue-500/20 rounded-2xl p-8">
-          <h3 className="text-2xl font-bold text-white mb-3">
-            Let's Code Together! 🚀
-          </h3>
-          <p className="text-gray-400 mb-6">
-            Check out my solutions and connect with me on these platforms
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href={`https://leetcode.com/u/${LEETCODE_USERNAME}/`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white rounded-lg font-semibold transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center gap-2"
-            >
-              💻 LeetCode
-              <ExternalLink size={16} />
-            </a>
-            <a
-              href={`https://www.geeksforgeeks.org/user/${GFG_USERNAME}/`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg font-semibold transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center gap-2"
-            >
-              🎯 GeeksforGeeks
-              <ExternalLink size={16} />
-            </a>
-          </div>
-        </div>
-
+      
       </div>
     </section>
   );
