@@ -9,70 +9,75 @@ import { useState, useEffect } from 'react';
 
 const AnimatedBackground = () => {
   return (
-    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-      {/* Deep Space Base */}
-      <div className="absolute inset-0 bg-[#030014]" />
+    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#0a0a0a]">
 
-      {/* 3D Grid Effect */}
+      {/* Crisp Grid Pattern */}
       <div
-        className="absolute inset-0 opacity-20"
+        className="absolute inset-0 opacity-[0.15]"
         style={{
-          backgroundImage: `linear-gradient(to right, #4f4f4f2e 1px, transparent 1px),
-            linear-gradient(to bottom, #4f4f4f2e 1px, transparent 1px)`,
-          backgroundSize: '4rem 4rem',
-          transform: 'perspective(1000px) rotateX(60deg) scale(2.5)',
-          transformOrigin: 'top center',
+          backgroundImage: `
+            linear-gradient(rgba(100, 116, 139, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(100, 116, 139, 0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px',
         }}
       />
 
-      {/* Radial Gradient Overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(76,29,149,0.1),transparent_70%)]" />
+      {/* Radial Gradient Glow for depth (centered) */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_50%,rgba(124,58,237,0.15),transparent)]" />
 
-      {/* Floating Orbs */}
+      {/* Floating Geometric Shapes (Squares/Plus) for "Designed" feel */}
       <motion.div
+        initial={{ opacity: 0 }}
         animate={{
+          opacity: [0.1, 0.3, 0.1],
           scale: [1, 1.2, 1],
-          opacity: [0.3, 0.6, 0.3],
-          x: [0, 100, 0],
-          y: [0, -50, 0],
+          x: [0, 20, 0],
+          y: [0, -20, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute top-[20%] left-[15%] w-32 h-32 border border-purple-500/20 rounded-lg rotate-12"
+      />
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{
+          opacity: [0.1, 0.2, 0.1],
+          scale: [1, 1.1, 1],
+          x: [0, -30, 0],
+          rotate: [45, 90, 45],
         }}
         transition={{
           duration: 12,
           repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600/30 rounded-full blur-[120px] mix-blend-screen"
-      />
-
-      <motion.div
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.3, 0.5, 0.3],
-          x: [0, -100, 0],
-          y: [0, 50, 0],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
           ease: "easeInOut",
-          delay: 1
+          delay: 2
         }}
-        className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-cyan-600/20 rounded-full blur-[120px] mix-blend-screen"
+        className="absolute top-[60%] right-[10%] w-24 h-24 border border-cyan-500/20 rounded-full"
       />
 
       <motion.div
+        initial={{ opacity: 0 }}
         animate={{
-          scale: [1, 1.5, 1],
-          opacity: [0.2, 0.4, 0.2],
+          opacity: [0.05, 0.15, 0.05],
+          y: [0, 40, 0],
         }}
         transition={{
           duration: 10,
           repeat: Infinity,
           ease: "easeInOut",
-          delay: 2
+          delay: 1
         }}
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[100px] mix-blend-screen"
-      />
+        className="absolute bottom-[20%] left-[30%] text-6xl text-slate-700/10 font-mono pointer-events-none select-none"
+      >
+        +
+      </motion.div>
+
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-[#0a0a0a]" />
     </div>
   );
 };
