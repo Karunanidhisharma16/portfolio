@@ -1,5 +1,6 @@
 import { Mail, Github, Linkedin, MapPin, Send } from 'lucide-react';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ const Contact = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(''); 
+  const [submitStatus, setSubmitStatus] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -24,7 +25,7 @@ const Contact = () => {
     setSubmitStatus('');
 
     try {
-      const response = await fetch(' https://portfoliobackend-jigr.onrender.com/api/contact', {
+      const response = await fetch('https://portfoliobackend-jigr.onrender.com/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
@@ -47,149 +48,164 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="min-h-screen bg-gray-900 py-20 px-4">
+    <section id="contact" className="min-h-screen py-20 px-4 relative">
       <div className="max-w-6xl mx-auto">
-
-     
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Get In Touch
+            Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Touch</span>
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-slate-400 text-lg">
             Have a project in mind? Let's work together!
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 
-       
-          <div>
-            <h3 className="text-2xl font-bold text-white mb-6">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h3 className="text-2xl font-bold text-white mb-8">
               Contact Information
             </h3>
 
-            <div className="flex items-start gap-4 mb-6">
-              <Mail className="text-blue-400 mt-1" size={24} />
+            <div className="flex items-start gap-4 mb-8">
+              <div className="p-3 bg-purple-500/10 rounded-lg text-purple-400">
+                <Mail size={24} />
+              </div>
               <div>
-                <p className="font-semibold text-white">Email</p>
+                <p className="font-semibold text-white mb-1">Email</p>
                 <a
-                  href="mailto:24234@iiitu.ac.in"
-                  className="text-blue-400 hover:text-blue-300 transition"
+                  href="mailto:karunanidhisharma89@gmail.com"
+                  className="text-slate-400 hover:text-purple-400 transition"
                 >
                   karunanidhisharma89@gmail.com
                 </a>
               </div>
             </div>
 
-            <div className="flex items-start gap-4 mb-6">
-              <MapPin className="text-blue-400 mt-1" size={24} />
+            <div className="flex items-start gap-4 mb-8">
+              <div className="p-3 bg-cyan-500/10 rounded-lg text-cyan-400">
+                <MapPin size={24} />
+              </div>
               <div>
-                <p className="font-semibold text-white">Location</p>
-                
-                <p className="text-gray-300">Bhilwara, Rajasthan – 311001, India
-</p>
+                <p className="font-semibold text-white mb-1">Location</p>
+                <p className="text-slate-400">Bhilwara, Rajasthan – 311001, India</p>
               </div>
             </div>
 
-            
-            <div className="mt-8">
+            <div className="mt-12">
               <p className="font-semibold text-white mb-4">Connect with me</p>
               <div className="flex gap-4">
-
-                <a
-                  href="https://github.com/Karunanidhisharma16"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition"
-                >
-                  <Github size={24} />
-                </a>
-
-                <a
-                  href="https://www.linkedin.com/in/karunanidhi-sharma-154465323?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-12 h-12 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-blue-400 transition"
-                >
-                  <Linkedin size={24} />
-                </a>
-
-                <a
-                  href="mailto:24234@iiitu.ac.in"
-                  className="w-12 h-12 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center text-gray-400 hover:text-red-400 transition"
-                >
-                  <Mail size={24} />
-                </a>
-
+                {[
+                  { Icon: Github, href: "https://github.com/Karunanidhisharma16", color: "hover:text-white" },
+                  { Icon: Linkedin, href: "https://www.linkedin.com/in/karunanidhi-sharma-154465323", color: "hover:text-blue-400" },
+                  { Icon: Mail, href: "mailto:karunanidhisharma89@gmail.com", color: "hover:text-red-400" }
+                ].map(({ Icon, href, color }, idx) => (
+                  <a
+                    key={idx}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-12 h-12 bg-white/5 border border-white/5 hover:border-white/10 rounded-xl flex items-center justify-center text-slate-400 ${color} transition-all duration-300 hover:scale-110`}
+                  >
+                    <Icon size={24} />
+                  </a>
+                ))}
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* RIGHT SIDE */}
-          <div className="bg-gray-800 rounded-lg p-8 shadow-lg">
+          {/* Form Side */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 shadow-2xl"
+          >
             <h3 className="text-2xl font-bold text-white mb-6">
               Send a Message
             </h3>
 
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-300 mb-2">Name</label>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-slate-300 mb-2 text-sm font-medium">Name</label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 bg-black/20 border border-white/10 text-white rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all outline-none"
+                  placeholder="Your Name"
                 />
               </div>
 
-              <div className="mb-4">
-                <label className="block text-gray-300 mb-2">Email</label>
+              <div>
+                <label className="block text-slate-300 mb-2 text-sm font-medium">Email</label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 bg-black/20 border border-white/10 text-white rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all outline-none"
+                  placeholder="your.email@example.com"
                 />
               </div>
 
-              <div className="mb-6">
-                <label className="block text-gray-300 mb-2">Message</label>
+              <div>
+                <label className="block text-slate-300 mb-2 text-sm font-medium">Message</label>
                 <textarea
                   name="message"
                   rows="5"
                   value={formData.message}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 bg-gray-700 text-white rounded-lg focus:ring-2 focus:ring-blue-500 resize-none"
+                  className="w-full px-4 py-3 bg-black/20 border border-white/10 text-white rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all outline-none resize-none"
+                  placeholder="How can I help you?"
                 />
               </div>
 
               {submitStatus === 'success' && (
-                <div className="mb-4 p-3 bg-green-500/20 border border-green-500 text-green-400 rounded">
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-3 bg-green-500/20 border border-green-500/50 text-green-400 rounded-lg text-sm"
+                >
                   ✓ Message sent successfully!
-                </div>
+                </motion.div>
               )}
 
               {submitStatus === 'error' && (
-                <div className="mb-4 p-3 bg-red-500/20 border border-red-500 text-red-400 rounded">
-                  ✗ Failed to send message
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-3 bg-red-500/20 border border-red-500/50 text-red-400 rounded-lg text-sm"
+                >
+                  ✗ Failed to send message. Please try again.
+                </motion.div>
               )}
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 py-3 rounded-lg font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 py-4 rounded-xl font-bold text-white transition-all shadow-lg hover:shadow-purple-500/25 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transform hover:-translate-y-0.5"
               >
                 <Send size={18} />
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
-          </div>
+          </motion.div>
 
         </div>
       </div>

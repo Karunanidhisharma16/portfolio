@@ -43,7 +43,7 @@ const DSA = () => {
       try {
         console.log('Trying endpoint:', endpoint.url);
         const response = await fetch(endpoint.url);
-        
+
         if (!response.ok) {
           console.log('Endpoint failed with status:', response.status);
           continue;
@@ -120,9 +120,9 @@ const DSA = () => {
       setLoading(false);
       setLastUpdated(new Date());
     };
-    
+
     load();
-    
+
     // Auto-refresh every 5 minutes
     const interval = setInterval(load, 5 * 60 * 1000);
     return () => clearInterval(interval);
@@ -155,7 +155,7 @@ const DSA = () => {
   return (
     <section
       id="dsa"
-      className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-20 px-4"
+      className="min-h-screen py-20 px-4 relative"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
@@ -165,17 +165,6 @@ const DSA = () => {
             <h2 className="text-4xl md:text-5xl font-bold text-white">
               DSA Profiles
             </h2>
-            <button
-              onClick={handleRefresh}
-              disabled={loading}
-              className="ml-4 p-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition disabled:opacity-50"
-              title="Refresh Stats"
-            >
-              <RefreshCw
-                className={`text-gray-300 ${loading ? 'animate-spin' : ''}`}
-                size={20}
-              />
-            </button>
           </div>
           <p className="text-gray-400 text-lg">
             My competitive programming journey
@@ -189,10 +178,10 @@ const DSA = () => {
 
         {/* Profile Cards Grid */}
         <div className="grid md:grid-cols-2 gap-8 mb-12">
-          
+
           {/* ==================== LEETCODE CARD ==================== */}
           <div className="relative bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 hover:border-orange-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/10 transform hover:-translate-y-2">
-            
+
             {/* Status Badge */}
             <div className="absolute top-4 right-4">
               {leetcodeData && !error ? (
@@ -332,7 +321,7 @@ const DSA = () => {
 
           {/* ==================== ALL CODING PROFILES CARD ==================== */}
           <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 transform hover:-translate-y-2">
-            
+
             {/* Header */}
             <div className="flex items-center gap-4 mb-6">
               <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-lg text-3xl">
@@ -350,7 +339,7 @@ const DSA = () => {
 
             {/* Profile Links */}
             <div className="space-y-4">
-              
+
               {/* LeetCode Link */}
               <a
                 href={`https://leetcode.com/u/${LEETCODE_USERNAME}/`}
@@ -436,7 +425,7 @@ const DSA = () => {
 
         </div>
 
-      
+
       </div>
     </section>
   );
