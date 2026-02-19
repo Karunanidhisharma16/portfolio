@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X, Code2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,7 +10,6 @@ const Navbar = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -34,65 +32,65 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-4' : 'py-6'
+      className={`fixed top-4 left-1/2 transform -translate-x-1/2 w-[95%] max-w-7xl z-50 transition-all duration-300 rounded-2xl ${scrolled
+          ? 'bg-gray-900/80 backdrop-blur-md shadow-lg shadow-purple-500/10 py-3 border border-white/10'
+          : 'bg-transparent py-4'
         }`}
     >
-      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ${scrolled ? 'bg-white/5 backdrop-blur-lg border border-white/10 rounded-full mx-4 shadow-lg' : ''
-        }`}>
-        <div className="flex justify-between items-center h-16 px-2">
+      <div className="px-6 mx-auto flex justify-between items-center">
 
-          {/* Logo */}
-          <button
-            onClick={() => scrollToSection('hero')}
-            className="flex items-center gap-2 group"
-          >
-            <div className="bg-gradient-to-tr from-purple-500 to-cyan-500 p-2 rounded-lg group-hover:scale-110 transition-transform duration-300">
-              <Code2 className="text-white w-6 h-6" />
-            </div>
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-              KS
-            </span>
-          </button>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-1">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="relative px-4 py-2 text-gray-300 hover:text-white transition group overflow-hidden rounded-full hover:bg-white/5"
-              >
-                <span className="relative z-10">{link.name}</span>
-
-              </button>
-            ))}
+        {/* Logo */}
+        <button
+          onClick={() => scrollToSection('hero')}
+          className="flex items-center gap-2 group"
+        >
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:shadow-blue-500/50 transition-all">
+            <Code2 size={20} />
           </div>
+          <span className="text-xl font-bold text-white tracking-tight group-hover:text-blue-400 transition-colors">
+            Karunanidhi
+          </span>
+        </button>
 
-          {/* Mobile Menu Button */}
+        {/* Desktop Menu */}
+        <div className="hidden md:flex space-x-1">
+          {navLinks.map((link) => (
+            <button
+              key={link.id}
+              onClick={() => scrollToSection(link.id)}
+              className="px-4 py-2 rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 font-medium"
+            >
+              {link.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <div className="md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-gray-300 hover:text-white p-2"
+            className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden absolute top-20 left-4 right-4 bg-gray-900/95 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden shadow-2xl"
+            className="md:hidden overflow-hidden bg-gray-900/95 backdrop-blur-xl border-t border-white/10 rounded-b-2xl mt-2"
           >
-            <div className="flex flex-col p-4 space-y-2">
+            <div className="px-4 py-4 space-y-2 flex flex-col items-center">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="w-full text-left px-4 py-3 text-gray-300 hover:bg-white/10 hover:text-white rounded-xl transition font-medium"
+                  className="block w-full text-center px-4 py-3 text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all font-medium"
                 >
                   {link.name}
                 </button>

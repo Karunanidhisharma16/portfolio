@@ -9,75 +9,60 @@ import { useState, useEffect } from 'react';
 
 const AnimatedBackground = () => {
   return (
-    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#0a0a0a]">
+    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+      {/* Deep Space Base */}
+      <div className="absolute inset-0 bg-[#0a0a0a]" />
 
-      {/* Crisp Grid Pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.15]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(100, 116, 139, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(100, 116, 139, 0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px',
-        }}
+      {/* Subtle Noise Texture for "Vibe" */}
+      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay"
+        style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
       />
 
-      {/* Radial Gradient Glow for depth (centered) */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_50%,rgba(124,58,237,0.15),transparent)]" />
-
-      {/* Floating Geometric Shapes (Squares/Plus) for "Designed" feel */}
+      {/* Calmer, Slower Floating Orbs */}
       <motion.div
-        initial={{ opacity: 0 }}
         animate={{
-          opacity: [0.1, 0.3, 0.1],
-          scale: [1, 1.2, 1],
-          x: [0, 20, 0],
-          y: [0, -20, 0],
+          scale: [1, 1.1, 1],
+          opacity: [0.2, 0.4, 0.2],
+          x: [0, 50, 0],
+          y: [0, -30, 0],
         }}
         transition={{
-          duration: 8,
+          duration: 20,
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute top-[20%] left-[15%] w-32 h-32 border border-purple-500/20 rounded-lg rotate-12"
+        className="absolute top-[-10%] left-[-10%] w-[800px] h-[800px] bg-purple-900/20 rounded-full blur-[120px]"
       />
 
       <motion.div
-        initial={{ opacity: 0 }}
         animate={{
-          opacity: [0.1, 0.2, 0.1],
-          scale: [1, 1.1, 1],
-          x: [0, -30, 0],
-          rotate: [45, 90, 45],
+          scale: [1, 1.2, 1],
+          opacity: [0.1, 0.3, 0.1],
+          x: [0, -50, 0],
+          y: [0, 40, 0],
         }}
         transition={{
-          duration: 12,
+          duration: 25,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 2
         }}
-        className="absolute top-[60%] right-[10%] w-24 h-24 border border-cyan-500/20 rounded-full"
+        className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[120px]"
       />
 
       <motion.div
-        initial={{ opacity: 0 }}
         animate={{
-          opacity: [0.05, 0.15, 0.05],
-          y: [0, 40, 0],
+          scale: [1, 1.1, 1],
+          opacity: [0.1, 0.2, 0.1],
         }}
         transition={{
-          duration: 10,
+          duration: 18,
           repeat: Infinity,
           ease: "easeInOut",
-          delay: 1
+          delay: 5
         }}
-        className="absolute bottom-[20%] left-[30%] text-6xl text-slate-700/10 font-mono pointer-events-none select-none"
-      >
-        +
-      </motion.div>
-
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent to-[#0a0a0a]" />
+        className="absolute top-[30%] left-[40%] transform -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-slate-800/20 rounded-full blur-[150px]"
+      />
     </div>
   );
 };

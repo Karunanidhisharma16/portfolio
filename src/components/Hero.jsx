@@ -11,9 +11,9 @@ const Hero = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center px-4 overflow-hidden pt-20">
 
-      {/* Background decoration */}
-      <div className="absolute top-20 right-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
+      {/* Background decoration - Reduced blur, sharper gradient */}
+      <div className="absolute top-20 right-10 w-72 h-72 bg-purple-600/10 rounded-full blur-[80px]" />
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-[80px]" />
 
       <div className="max-w-5xl w-full text-center z-10">
 
@@ -23,12 +23,10 @@ const Hero = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-10 inline-block relative group"
         >
-          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full blur cupacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-          <div className="relative w-40 h-40 rounded-full bg-slate-900 flex items-center justify-center border-4 border-slate-800 overflow-hidden">
-            <div className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-purple-400 to-cyan-400">
-              KS
-            </div>
-            {/* Replace this with <img src={profilePic} /> if available */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full blur-md opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+          <div className="relative w-40 h-40 rounded-full bg-[#0a0a0a] flex items-center justify-center border-2 border-white/10 overflow-hidden">
+            <span className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-white to-slate-400">KS</span>
+            {/* Replace with your image */}
           </div>
         </motion.div>
 
@@ -37,11 +35,11 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <h2 className="text-xl md:text-2xl text-cyan-400 font-semibold mb-4 tracking-wide uppercase">
+          <h2 className="text-xl md:text-2xl text-cyan-300 font-medium mb-4 tracking-wide uppercase">
             Full Stack Developer
           </h2>
-          <h1 className="text-5xl md:text-8xl font-bold text-white mb-6 tracking-tight leading-tight">
-            Karunanidhi <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Sharma</span>
+          <h1 className="text-5xl md:text-8xl font-bold text-white mb-6 tracking-tight leading-tight drop-shadow-xl">
+            Karunanidhi <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">Sharma</span>
           </h1>
         </motion.div>
 
@@ -49,7 +47,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="text-slate-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
+          className="text-slate-200 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed font-light"
         >
           Passionate about crafting elegant solutions to complex problems.
           Building modern web applications with React, Node.js, and MongoDB.
@@ -63,7 +61,7 @@ const Hero = () => {
         >
           <button
             onClick={() => scrollToSection("projects")}
-            className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-full font-bold transition shadow-lg hover:shadow-purple-500/25 transform hover:-translate-y-1"
+            className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white rounded-full font-bold transition shadow-lg hover:shadow-purple-500/40 transform hover:-translate-y-1"
           >
             View Projects
           </button>
@@ -101,7 +99,7 @@ const Hero = () => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 bg-white/5 rounded-full hover:bg-white/10 hover:text-cyan-400 transition-all duration-300 border border-white/5 hover:border-cyan-500/30 group"
+              className="p-3 bg-white/5 rounded-full hover:bg-white/10 hover:text-cyan-400 transition-all duration-300 border border-white/5 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/20 group"
             >
               <Icon size={24} className="group-hover:scale-110 transition-transform" />
             </a>

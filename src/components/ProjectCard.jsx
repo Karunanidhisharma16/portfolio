@@ -16,81 +16,81 @@ const ProjectCard = ({
   githubLink,
 }) => {
   return (
-    <div className="group h-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 flex flex-col">
-
-      {/* Project Image */}
+    <motion.div
+      className="group bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg border border-white/10 hover:border-white/20 hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
+      whileHover={{ y: -8 }}
+    >
+      {/* Image Container with Overlay */}
       <div className="relative h-48 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent z-10 opacity-60" />
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
         />
-        <div className="absolute bottom-4 left-4 z-20">
-          <div className="flex gap-2">
-            {tech.slice(0, 3).map((t, i) => (
-              <span key={i} className="text-xs font-bold px-2 py-1 bg-black/50 backdrop-blur-md rounded-md text-cyan-400 border border-cyan-500/20">
-                {t}
-              </span>
-            ))}
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+          <div className="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+            {liveLink && (
+              <a href={liveLink} target="_blank" rel="noreferrer" className="p-2 bg-blue-600 rounded-full text-white hover:bg-blue-500 transition">
+                <ExternalLink size={20} />
+              </a>
+            )}
+            {githubLink && (
+              <a href={githubLink} target="_blank" rel="noreferrer" className="p-2 bg-gray-800 rounded-full text-white hover:bg-gray-700 transition">
+                <Github size={20} />
+              </a>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Card Content */}
+      {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
-
-        {/* Project Title */}
-        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+        <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
           {title}
         </h3>
 
-        {/* Description */}
-        <p className="text-slate-400 text-sm mb-6 leading-relaxed flex-grow">
+        <p className="text-gray-400 mb-6 flex-grow leading-relaxed text-sm">
           {description}
         </p>
 
-        {/* Tech Stack Badges (Remaining) */}
-        {tech.length > 3 && (
-          <div className="flex flex-wrap gap-2 mb-6">
-            {tech.slice(3).map((technology, index) => (
-              <span
-                key={index}
-                className="px-2 py-1 bg-white/5 text-slate-300 text-xs rounded-md"
-              >
-                {technology}
-              </span>
-            ))}
-          </div>
-        )}
+        {/* Tech Stack Badges */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {tech.map((item, index) => (
+            <span
+              key={index}
+              className="px-3 py-1 bg-white/5 text-blue-300 text-xs font-mono rounded-full border border-white/5 hover:bg-white/10 transition"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
 
-        {/* Action Buttons */}
-        <div className="flex gap-3 mt-auto">
-          {/* Live Demo */}
-          <a
-            href={liveLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="flex items-center justify-center gap-2 flex-1 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-2.5 rounded-xl font-semibold transition text-sm shadow-lg hover:shadow-cyan-500/25"
-          >
-            <ExternalLink size={16} />
-            Live Demo
-          </a>
+        {/* Footer Actions (Small screens mainly as overlay handles desktop) */}
+        <div className="flex justify-between items-center mt-auto pt-4 border-t border-white/10">
+          {liveLink ? (
+            <a
+              href={liveLink}
+              target="_blank"
+              rel="noreferrer"
+              className="text-sm font-semibold text-blue-400 flex items-center gap-1 hover:gap-2 transition-all"
+            >
+              Live Demo <ExternalLink size={14} />
+            </a>
+          ) : <span />}
 
-          {/* GitHub */}
-          <a
-            href={githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 flex-1 bg-white/5 hover:bg-white/10 border border-white/10 text-white py-2.5 rounded-xl font-semibold transition text-sm"
-          >
-            <Github size={16} />
-            GitHub
-          </a>
+          {githubLink && (
+            <a
+              href={githubLink}
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <Github size={20} />
+            </a>
+          )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
