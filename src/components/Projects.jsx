@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 function Projects() {
   return (
-    <section id="projects" className="min-h-screen py-20 px-4 relative">
+    <section id="projects" className="min-h-screen py-20 px-4 relative scroll-mt-32">
       <div className="max-w-7xl mx-auto">
 
         <motion.div
@@ -12,13 +12,19 @@ function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            My <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Projects</span>
+          <div className="inline-block mb-4 px-4 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 font-semibold text-sm tracking-wide uppercase">
+            Portfolio
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Masterpieces</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Here are some of my recent works showcasing my skills in web development
+          <p className="text-slate-400 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed">
+            A curated collection of web applications demonstrating my passion for
+            <span className="text-cyan-400"> performance</span>,
+            <span className="text-purple-400"> design</span>, and
+            <span className="text-pink-400"> user experience</span>.
           </p>
         </motion.div>
 
