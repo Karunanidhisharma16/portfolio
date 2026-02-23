@@ -14,8 +14,8 @@ const AnimatedBackground = () => {
       <div className="absolute inset-0 bg-[#0a0a0a]" />
 
       {/* Subtle Noise Texture for "Vibe" */}
-      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay"
-        style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}
+      <div className="absolute inset-0 opacity-[0.03] mix-blend-overlay" 
+           style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }} 
       />
 
       {/* Calmer, Slower Floating Orbs */}
@@ -33,7 +33,7 @@ const AnimatedBackground = () => {
         }}
         className="absolute top-[-10%] left-[-10%] w-[800px] h-[800px] bg-purple-900/20 rounded-full blur-[120px]"
       />
-
+      
       <motion.div
         animate={{
           scale: [1, 1.2, 1],
